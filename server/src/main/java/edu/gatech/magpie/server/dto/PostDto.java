@@ -1,17 +1,24 @@
 package edu.gatech.magpie.server.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
+import java.util.Date;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 @Data
-@Accessors(chain = true)
 @NoArgsConstructor
-@JsonInclude(value = JsonInclude.Include.NON_NULL)
+@Accessors(chain = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AccountDto {
+public class PostDto {
+
+  private long id;
+
   private String username;
-  private String password;
+
+  private String content;
+
+  private Date timeCreated;
+
+  private Date timeModified;
 }
