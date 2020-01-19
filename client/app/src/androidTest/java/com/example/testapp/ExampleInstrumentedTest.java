@@ -1,4 +1,4 @@
-package edu.gatech.magpie.client;
+package com.example.testapp;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("edu.gatech.magpie.client", appContext.getPackageName());
+        assertEquals("com.example.testapp", appContext.getPackageName());
     }
 }

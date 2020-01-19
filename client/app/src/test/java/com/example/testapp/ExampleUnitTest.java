@@ -1,4 +1,4 @@
-package edu.gatech.magpie.client;
+package com.example.testapp;
 
 import org.junit.Test;
 
