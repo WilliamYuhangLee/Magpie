@@ -1,13 +1,11 @@
-package com.example.testapp;
+package com.example.Magpie;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.content.Intent;
 import android.view.Menu;
 //import android.widget.Toolbar;
 
-import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
 

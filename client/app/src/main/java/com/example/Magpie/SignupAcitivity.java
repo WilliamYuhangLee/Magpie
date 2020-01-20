@@ -1,4 +1,4 @@
-package com.example.testapp;
+package com.example.Magpie;
 
 import androidx.appcompat.app.AppCompatActivity;
 
