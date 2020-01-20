@@ -4,6 +4,7 @@ import edu.gatech.magpie.server.dto.PostDto;
 import edu.gatech.magpie.server.request.PostRequest;
 import edu.gatech.magpie.server.response.Response;
 import edu.gatech.magpie.server.service.PostService;
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +27,18 @@ public class PostController {
   public Response create(@RequestParam String username, @RequestBody PostRequest request) {
     PostDto postDto = postService.create(username, request.getContent());
     return Response.withStatus(HttpStatus.CREATED).setPayload(postDto);
+  }
+
+  @RequestMapping(value = "/{postId}", method = RequestMethod.GET)
+  public Response get(@PathVariable long postId) {
+    PostDto post = postService.get(postId);
+    return Response.withStatus(HttpStatus.OK).setPayload(post);
+  }
+
+  @RequestMapping(method = RequestMethod.GET)
+  public Response get(@RequestParam String username) {
+    List<PostDto> posts = postService.get(username);
+    return Response.withStatus(HttpStatus.OK).setPayload(posts);
   }
 
   @RequestMapping(value = "/{postId}", method = RequestMethod.PUT)

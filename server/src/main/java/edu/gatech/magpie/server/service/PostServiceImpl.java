@@ -6,6 +6,8 @@ import edu.gatech.magpie.server.model.Post;
 import edu.gatech.magpie.server.repository.AccountRepository;
 import edu.gatech.magpie.server.repository.PostRepository;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,17 +26,31 @@ public class PostServiceImpl implements PostService {
     Account creator =
         accountRepository
             .findById(username)
-            .orElseThrow(() -> new RuntimeException("Invalid username <" + username + ">."));
+            .orElseThrow(() -> new RuntimeException("No such user <" + username + ">."));
     Date now = new Date();
     Post post =
         new Post().setCreator(creator).setTimeCreated(now).setTimeModified(now).setContent(content);
     postRepository.saveAndFlush(post);
-    return new PostDto()
-        .setId(post.getId())
-        .setUsername(post.getCreator().getUsername())
-        .setContent(post.getContent())
-        .setTimeCreated(post.getTimeCreated())
-        .setTimeModified(post.getTimeModified());
+    return new PostDto(post);
+  }
+
+  @Override
+  public PostDto get(long postId) {
+    Post post =
+        postRepository
+            .findById(postId)
+            .orElseThrow(() -> new RuntimeException("No such post with ID <" + postId + ">."));
+    return new PostDto(post);
+  }
+
+  @Override
+  public List<PostDto> get(String username) {
+    Account creator =
+        accountRepository
+            .findById(username)
+            .orElseThrow(() -> new RuntimeException("No such user <" + username + ">."));
+    List<Post> list = postRepository.getAllByCreator(creator);
+    return list.stream().map(PostDto::new).collect(Collectors.toList());
   }
 
   @Override
@@ -42,15 +58,10 @@ public class PostServiceImpl implements PostService {
     Post post =
         postRepository
             .findById(postId)
-            .orElseThrow(() -> new RuntimeException("Invalid post ID <" + postId + ">."));
+            .orElseThrow(() -> new RuntimeException("No such post with ID <" + postId + ">."));
     post.setContent(content).setTimeModified(new Date());
     postRepository.saveAndFlush(post);
-    return new PostDto()
-        .setId(post.getId())
-        .setUsername(post.getCreator().getUsername())
-        .setContent(post.getContent())
-        .setTimeCreated(post.getTimeCreated())
-        .setTimeModified(post.getTimeModified());
+    return new PostDto(post);
   }
 
   @Override
