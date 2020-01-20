@@ -10,11 +10,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class LoginActivity extends AppCompatActivity {
     private EditText loginEmail;
     private EditText loginPassword;
     private Button loginBtn;
     private Button loginSignupBtn;
+    public static final String BASE_URL = "http://api/post/new";
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                     sendToMain();
                 } else{
                     Toast.makeText(LoginActivity.this, "Error : Plz enter email or password" , Toast.LENGTH_LONG).show();
-
                 }
-
 
             }
 
