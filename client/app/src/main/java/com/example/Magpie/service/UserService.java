@@ -11,4 +11,9 @@ public interface UserService {
 
     @POST("account/login")
     Call<Response<Void>> login(@Body User user);
+
+    @POST("account/signUp")
+    Call<Response<Void>> signUp(@Body User user);
+
+
 }
