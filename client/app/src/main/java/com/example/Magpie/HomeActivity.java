@@ -4,28 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.Menu;
+
+import com.example.Magpie.model.Post;
+
+import java.util.ArrayList;
 //import android.widget.Toolbar;
 
 
-public class MainActivity extends AppCompatActivity {
-
-//    private Toolbar mainToolbar;
+public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        mainToolbar = (Toolbar) findViewById(R.id.main_toolbar);
-//        mainToolbar.setTitle("haha");
-//        setSupportActionBar(mainToolbar);
-//        getActionBar().setDisplayShowTitleEnabled(true);
-//
         getSupportActionBar().setTitle("Blog Posts");
-
-
-//        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-//        startActivity(intent);
 
 
     }

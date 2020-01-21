@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void sendToMain() {
 
-        Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+        Intent mainIntent = new Intent(LoginActivity.this, HomeActivity.class);
         startActivity(mainIntent);
         finish();
 

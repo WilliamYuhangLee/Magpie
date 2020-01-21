@@ -67,7 +67,7 @@ public class SignupAcitivity extends AppCompatActivity {
                             String status = response.body().getStatus();
                             if (status.equals("NO_CONTENT")) {
                                 Toast.makeText(SignupAcitivity.this, "Sign up successfully", Toast.LENGTH_SHORT).show();
-                                sendToLogin();
+                                sendToHome();
                             } else {
                                 if (response.body().getError() != null) {
                                     Toast.makeText(SignupAcitivity.this, response.body().getError().getMessage(), Toast.LENGTH_SHORT).show();
@@ -88,6 +88,13 @@ public class SignupAcitivity extends AppCompatActivity {
                 }
             }
         });
+
+    }
+
+    private void sendToHome() {
+        Intent mainIntent = new Intent(SignupAcitivity.this, HomeActivity.class);
+        startActivity(mainIntent);
+        finish();
 
     }
 
