@@ -34,21 +34,24 @@ public class AccountServiceImpl implements AccountService {
   }
 
   @Override
-  public boolean login(AccountDto accountDto) {
-    Account account = accountRepository.findById(accountDto.getUsername()).orElse(null);
+  public boolean authenticate(String username, String password) {
+    Account account = accountRepository.findById(username).orElse(null);
     if (account == null) {
       return false;
     }
-    return passwordEncoder.matches(accountDto.getPassword(), account.getPassword());
+    return passwordEncoder.matches(password, account.getPassword());
   }
 
   @Override
-  public boolean changePassword(AccountDto accountDto) {
-    Account account = accountRepository.findById(accountDto.getUsername()).orElse(null);
+  public boolean changePassword(String username, String oldPassword, String newPassword) {
+    Account account = accountRepository.findById(username).orElse(null);
     if (account == null) {
       return false;
     }
-    account.setPassword(passwordEncoder.encode(accountDto.getPassword()));
+    if (!passwordEncoder.matches(oldPassword, account.getPassword())) {
+      return false;
+    }
+    account.setPassword(passwordEncoder.encode(newPassword));
     accountRepository.saveAndFlush(account);
     return true;
   }

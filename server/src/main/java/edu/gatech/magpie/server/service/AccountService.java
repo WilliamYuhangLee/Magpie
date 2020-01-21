@@ -13,12 +13,13 @@ public interface AccountService {
   boolean signUp(AccountDto accountDto);
 
   /**
-   * Perform login credential check.
+   * Perform authenticate credential check.
    *
-   * @param accountDto AccountDto containing login credentials
+   * @param username String
+   * @param password String
    * @return true if valid credential, false if otherwise.
    */
-  boolean login(AccountDto accountDto);
+  boolean authenticate(String username, String password);
 
-  boolean changePassword(AccountDto accountDto);
+  boolean changePassword(String username, String oldPassword, String newPassword);
 }

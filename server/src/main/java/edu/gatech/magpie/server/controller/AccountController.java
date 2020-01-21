@@ -2,6 +2,7 @@ package edu.gatech.magpie.server.controller;
 
 import edu.gatech.magpie.server.dto.AccountDto;
 import edu.gatech.magpie.server.request.AccountRequest;
+import edu.gatech.magpie.server.request.PasswordChangeRequest;
 import edu.gatech.magpie.server.response.Response;
 import edu.gatech.magpie.server.service.AccountService;
 import javax.validation.Valid;
@@ -33,8 +34,7 @@ public class AccountController {
 
   @RequestMapping(value = "/login", method = RequestMethod.POST)
   public Response login(@RequestBody @Valid AccountRequest request) {
-    if (accountService.login(
-        new AccountDto().setUsername(request.getUsername()).setPassword(request.getPassword()))) {
+    if (accountService.authenticate(request.getUsername(), request.getPassword())) {
       return Response.withStatus(HttpStatus.NO_CONTENT);
     } else {
       return Response.withStatus(HttpStatus.UNAUTHORIZED).addError("Invalid credentials.");
@@ -42,9 +42,9 @@ public class AccountController {
   }
 
   @RequestMapping(value = "/changePassword", method = RequestMethod.PUT)
-  public Response changePassword(@RequestBody @Valid AccountRequest request) {
+  public Response changePassword(@RequestBody @Valid PasswordChangeRequest request) {
     if (accountService.changePassword(
-        new AccountDto().setUsername(request.getUsername()).setPassword(request.getPassword()))) {
+        request.getUsername(), request.getOldPassword(), request.getNewPassword())) {
       return Response.withStatus(HttpStatus.NO_CONTENT);
     } else {
       return Response.withStatus(HttpStatus.BAD_REQUEST).addError("Unable to change password.");
