@@ -10,26 +10,26 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.Magpie.model.User;
+import com.example.Magpie.service.UserService;
+
+import retrofit2.Call;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
-    private EditText loginEmail;
+
+    private EditText loginUsername;
     private EditText loginPassword;
     private Button loginBtn;
     private Button loginSignupBtn;
-    public static final String BASE_URL = "http://api/post/new";
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
+    Retrofit retrofit = RetrofitInstance.getRetrofitInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        loginEmail = findViewById(R.id.login_email);
+        loginUsername = findViewById(R.id.login_email);
         loginPassword = findViewById(R.id.login_password);
         loginBtn = findViewById(R.id.login_btn);
         loginSignupBtn = findViewById(R.id.login_signup_btn);
@@ -47,10 +47,15 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String email = loginEmail.getText().toString();
-                String pass = loginPassword.getText().toString();
+                String username = loginUsername.getText().toString();
+                String password = loginPassword.getText().toString();
 
-                if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(pass)){
+                User user = new User().setUsername(username).setPassword(password);
+
+                if(!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)){
+                    UserService userService = retrofit.create(UserService.class);
+                    Call<Void> call = userService.login(user);
+                    // get status code
                     sendToMain();
                 } else{
                     Toast.makeText(LoginActivity.this, "Error : Plz enter email or password" , Toast.LENGTH_LONG).show();
