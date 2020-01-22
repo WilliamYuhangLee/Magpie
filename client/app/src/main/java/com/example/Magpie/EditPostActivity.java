@@ -1,19 +1,17 @@
 package com.example.Magpie;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.Magpie.model.Post;
 import com.example.Magpie.model.Response;
 import com.example.Magpie.service.PostService;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 
@@ -51,7 +49,7 @@ public class EditPostActivity extends AppCompatActivity {
                         String status = response.body().getStatus();
                         if (status.equals("OK")) {
                             Toast.makeText(EditPostActivity.this, "Modified Successfully", Toast.LENGTH_SHORT).show();
-                            sendToHome();
+                            finish();
                         } else {
                             if (response.body().getError() != null) {
                                 Toast.makeText(EditPostActivity.this, response.body().getError().getMessage(), Toast.LENGTH_SHORT).show();
@@ -75,11 +73,7 @@ public class EditPostActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 long postId = getIntent().getLongExtra("postId", 1);
-                Post post = new Post().setContent("delete");
-
                 PostService postService = RetrofitInstance.getRetrofitInstance().create(PostService.class);
-//                Call<Response<Post>> call = postService.delete(postId);
-
                 Call<Response<Void>> call = postService.delete(postId);
                 call.enqueue(new Callback<Response<Void>>() {
                     @Override
@@ -87,7 +81,7 @@ public class EditPostActivity extends AppCompatActivity {
                         String status = response.body().getStatus();
                         if (status.equals("NO_CONTENT")) {
                             Toast.makeText(EditPostActivity.this, "Delete Successfully", Toast.LENGTH_SHORT).show();
-                            sendToHome();
+                            finish();
                         } else {
                             if (response.body().getError() != null) {
                                 Toast.makeText(EditPostActivity.this, response.body().getError().getMessage(), Toast.LENGTH_SHORT).show();
@@ -104,14 +98,5 @@ public class EditPostActivity extends AppCompatActivity {
                 });
             }
         });
-
-
-
-    }
-
-    public void sendToHome(){
-        Intent intent = new Intent(EditPostActivity.this, HomeActivity.class);
-        startActivity(intent);
-        finish();
     }
 }
