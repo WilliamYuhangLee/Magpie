@@ -2,6 +2,7 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="@string/account_btn" />
-    <item android:title="@string/signout_btn" />
+    <item
+        android:id="@+id/signout_btn"
+        android:title="@string/signout_btn" />
 </menu>

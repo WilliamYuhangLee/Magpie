@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Magpie</string>
     <string name="login_text">Login</string>
-    <string name="email_hint">Email</string>
     <string name="pass_hint">Password</string>
     <string name="login_btn">Login</string>
     <string name="signup_btn">Create a new account</string>
@@ -14,7 +13,7 @@
     <string name="signup_page_btn">Sign Up !</string>
     <string name="signup_login_btn">Already have an account?</string>
     <string name="login_logo">Magpie</string>
-    <string name="login_email">Email...</string>
+    <string name="login_username">Username...</string>
     <string name="login_password">Password...</string>
     <string name="login_signup_btn">Create an account</string>
     <string name="bottom_ac_text">Account</string>
@@ -32,4 +31,5 @@
     <string name="new_post_desc">Add new post...</string>
     <string name="new_post_btn">Add new post</string>
     <string name="add_new_post">Add new post</string>
+    <string name="signup_username">Username...</string>
 </resources>
