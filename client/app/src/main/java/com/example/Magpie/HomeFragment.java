@@ -38,6 +38,9 @@ public class HomeFragment extends Fragment {
 
     private List<Post> posts = new ArrayList<>();
 
+    private RecyclerView recyclerView;
+    private RecyclerViewAdapter recyclerViewAdapter;
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -52,16 +55,12 @@ public class HomeFragment extends Fragment {
                     Log.d(TAG, posts.toString());
                 }
             }
-
             @Override
             public void onFailure(Call<Response<List<Post>>> call, Throwable t) {
                 Toast.makeText(getActivity(), "Unable to retrieve posts!", Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "lol");
             }
         });
     }
-
-    private RecyclerView recyclerView;
 
     @Nullable
     @Override
@@ -72,24 +71,31 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         recyclerView = getView().findViewById(R.id.blog_list_view);
-
-        recyclerView.setAdapter(new PostAdapter());
+        recyclerViewAdapter = new RecyclerViewAdapter();
+        recyclerView.setAdapter(recyclerViewAdapter);
     }
 
-    public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> {
+    @Override
+    public void onResume() {
+        super.onResume();
+        recyclerViewAdapter.notifyDataSetChanged();
+    }
 
+    public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+
+        @NonNull
         @Override
-        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View itemView = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.blog_list_item, parent, false);
-            return new MyViewHolder(itemView);
+                    .inflate(R.layout.item_post, parent, false);
+            return new ViewHolder(itemView);
         }
 
         @Override
-        public void onBindViewHolder(PostAdapter.MyViewHolder holder, int position) {
+        public void onBindViewHolder(ViewHolder holder, int position) {
             Post post = posts.get(position);
-            holder.username.setText(post.getUsername());
-            holder.date.setText(post.getTimeModified().toString());
+            holder.username.setText("Created by " + post.getUsername());
+            holder.timeModified.setText("Last Modified: " + post.getTimeModified().toString());
             holder.content.setText(post.getContent());
         }
 
@@ -98,14 +104,14 @@ public class HomeFragment extends Fragment {
             return posts.size();
         }
 
-        public class MyViewHolder extends RecyclerView.ViewHolder {
-            public TextView username, date, content;
+        class ViewHolder extends RecyclerView.ViewHolder {
+            TextView username, timeModified, content;
 
-            public MyViewHolder(View view) {
-                super(view);
-                username = (TextView) view.findViewById(R.id.blog_username);
-                date = (TextView) view.findViewById(R.id.blog_date);
-                content = (TextView) view.findViewById(R.id.blog_content);
+            ViewHolder(View itemView) {
+                super(itemView);
+                username = (TextView) itemView.findViewById(R.id.post_username);
+                timeModified = (TextView) itemView.findViewById(R.id.post_time_modified);
+                content = (TextView) itemView.findViewById(R.id.post_content);
             }
         }
     }

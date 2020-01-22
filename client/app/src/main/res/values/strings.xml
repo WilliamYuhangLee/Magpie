@@ -25,9 +25,9 @@
     <string name="acc_original_pwd">Your current password...</string>
     <string name="acc_change_pwd">New password...</string>
     <string name="acc_confirm_btn">Confirm Password</string>
-    <string name="blog_date">blog_date</string>
-    <string name="blog_user_email">User Email</string>
-    <string name="blog_content">Cotent</string>
+    <string name="post_time_modified">blog_date</string>
+    <string name="post_username">User Email</string>
+    <string name="post_content">Cotent</string>
     <string name="new_post_desc">Add new post...</string>
     <string name="new_post_btn">Add new post</string>
     <string name="add_new_post">Add new post</string>
