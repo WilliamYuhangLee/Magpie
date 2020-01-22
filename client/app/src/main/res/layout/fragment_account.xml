@@ -9,14 +9,17 @@
 
     <TextView
         android:id="@+id/acc_title_text"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="138dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="176dp"
         android:layout_marginEnd="139dp"
-        android:text="@string/acc_title_text"
+        android:hint="@string/acc_title_text"
+        android:text="@string/acc_title"
+        android:textColor="@color/colorLight"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.434"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,7 +28,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="92dp"
         android:layout_marginEnd="8dp"
         android:autofillHints=""
         android:ems="10"
@@ -35,6 +38,7 @@
         android:textColorHint="@android:color/background_light"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/acc_title_text" />
 
@@ -43,24 +47,25 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="108dp"
         android:layout_marginEnd="8dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/acc_change_pwd"
         android:inputType="textPassword"
         android:textColor="@android:color/background_light"
         android:textColorHint="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/acc_original_pwd"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/acc_original_pwd" />
 
     <Button
         android:id="@+id/acc_comfirm_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="132dp"
         android:layout_marginEnd="32dp"
         android:background="@android:color/background_light"
         android:text="@string/acc_confirm_btn"
@@ -68,6 +73,7 @@
         android:textColor="@color/colorAccent"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/acc_change_pwd" />
 </androidx.constraintlayout.widget.ConstraintLayout>

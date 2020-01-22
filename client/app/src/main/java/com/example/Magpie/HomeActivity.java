@@ -68,6 +68,8 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected( MenuItem item){
         if(item.getItemId() == R.id.signout_btn){
+            String username = new Session(HomeActivity.this).getCurrentUsername();
+            new Session(HomeActivity.this).logout(username);
             Intent intent = new Intent(HomeActivity.this,WelcomeActivity.class);
             startActivity(intent);
             finish();

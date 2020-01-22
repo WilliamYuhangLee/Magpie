@@ -52,7 +52,7 @@ public class NewPostActivity extends AppCompatActivity {
                     public void onResponse(Call<Response<Post>> call, retrofit2.Response<Response<Post>> response) {
                         String status = response.body().getStatus();
                         if (status.equals("CREATED")) {
-                            Toast.makeText(NewPostActivity.this, "Add post successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(NewPostActivity.this, "Add new post successfully", Toast.LENGTH_SHORT).show();
                             sendToHome();
                         } else {
                             if (response.body().getError() != null) {
@@ -65,7 +65,7 @@ public class NewPostActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Response<Post>> call, Throwable t) {
-
+                        Toast.makeText(NewPostActivity.this, "Add new post failed", Toast.LENGTH_SHORT).show();
                     }
                 });
 

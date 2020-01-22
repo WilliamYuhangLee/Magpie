@@ -1,11 +1,13 @@
 package com.example.Magpie;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -88,11 +90,22 @@ public class HomeFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
+        public void onBindViewHolder(final ViewHolder holder, int position) {
             Post post = posts.get(position);
             holder.username.setText("Created by " + post.getUsername());
             holder.timeModified.setText("Last Modified: " + post.getTimeModified().toString());
             holder.content.setText(post.getContent());
+            holder.postId = post.getId();
+
+            holder.editPost.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), EditPostActivity.class);
+                    intent.putExtra("postId" , holder.postId);
+                    Log.d(TAG, "ok for here! ");
+                    startActivity(intent);
+                }
+            });
         }
 
         @Override
@@ -102,13 +115,19 @@ public class HomeFragment extends Fragment {
 
         class ViewHolder extends RecyclerView.ViewHolder {
             TextView username, timeModified, content;
+            Button editPost;
+            long postId;
 
-            ViewHolder(View itemView) {
+            ViewHolder(final View itemView) {
                 super(itemView);
-                username = (TextView) itemView.findViewById(R.id.post_username);
-                timeModified = (TextView) itemView.findViewById(R.id.post_time_modified);
-                content = (TextView) itemView.findViewById(R.id.post_content);
+                username =  itemView.findViewById(R.id.post_username);
+                timeModified =  itemView.findViewById(R.id.post_time_modified);
+                content =  itemView.findViewById(R.id.post_content);
+                editPost = itemView.findViewById(R.id.post_edit_btn);
             }
+
         }
+
+
     }
 }
