@@ -52,7 +52,7 @@ public class SignupAcitivity extends AppCompatActivity {
         signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = signupUsername.getText().toString();
+                final String username = signupUsername.getText().toString();
                 String password = signupPassword.getText().toString();
                 String confirmPassword = signupConfirmPassword.getText().toString();
 
@@ -67,6 +67,7 @@ public class SignupAcitivity extends AppCompatActivity {
                             String status = response.body().getStatus();
                             if (status.equals("NO_CONTENT")) {
                                 Toast.makeText(SignupAcitivity.this, "Sign up successfully", Toast.LENGTH_SHORT).show();
+                                new Session(SignupAcitivity.this).login(username);
                                 sendToHome();
                             } else {
                                 if (response.body().getError() != null) {
