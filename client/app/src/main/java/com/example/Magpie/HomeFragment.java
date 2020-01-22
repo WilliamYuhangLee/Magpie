@@ -41,27 +41,6 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        PostService postService = RetrofitInstance.getRetrofitInstance().create(PostService.class);
-        String username = new Session(getActivity()).getCurrentUsername();
-        Call<Response<List<Post>>> call = postService.getAllFrom(username);
-        call.enqueue(new Callback<Response<List<Post>>>() {
-            @Override
-            public void onResponse(Call<Response<List<Post>>> call, retrofit2.Response<Response<List<Post>>> response) {
-                if (response.body() != null && response.body().getPayload() != null) {
-                    posts.addAll(response.body().getPayload());
-                    Log.d(TAG, posts.toString());
-                }
-            }
-            @Override
-            public void onFailure(Call<Response<List<Post>>> call, Throwable t) {
-                Toast.makeText(getActivity(), "Unable to retrieve posts!", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -78,7 +57,24 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        recyclerViewAdapter.notifyDataSetChanged();
+        PostService postService = RetrofitInstance.getRetrofitInstance().create(PostService.class);
+        String username = new Session(getActivity()).getCurrentUsername();
+        Call<Response<List<Post>>> call = postService.getAllFrom(username);
+        call.enqueue(new Callback<Response<List<Post>>>() {
+            @Override
+            public void onResponse(Call<Response<List<Post>>> call, retrofit2.Response<Response<List<Post>>> response) {
+                if (response.body() != null && response.body().getPayload() != null) {
+                    posts.clear();
+                    posts.addAll(response.body().getPayload());
+                    Log.d(TAG, posts.toString());
+                    recyclerViewAdapter.notifyDataSetChanged();
+                }
+            }
+            @Override
+            public void onFailure(Call<Response<List<Post>>> call, Throwable t) {
+                Toast.makeText(getActivity(), "Unable to retrieve posts!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
