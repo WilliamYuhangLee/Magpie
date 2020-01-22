@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String username = loginUsername.getText().toString();
+                final String username = loginUsername.getText().toString();
                 String password = loginPassword.getText().toString();
 
                 User user = new User().setUsername(username).setPassword(password);
@@ -65,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                         public void onResponse(Call<Response<Void>> call, retrofit2.Response<Response<Void>> response) {
                             String status = response.body().getStatus();
                             if (status.equals("NO_CONTENT")) {
+                                new Session(LoginActivity.this).login(username);
                                 sendToHome();
                             } else {
                                 if (response.body().getError() != null) {
