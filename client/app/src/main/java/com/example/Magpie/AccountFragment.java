@@ -8,14 +8,19 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 public class AccountFragment extends Fragment {
-    public AccountFragment() {
-        // Required empty public constructor
+
+    private static AccountFragment fragment;
+
+    public static AccountFragment getInstance() {
+        if (fragment == null) {
+            fragment = new AccountFragment();
+        }
+        return fragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_account, container, false);
     }
 }

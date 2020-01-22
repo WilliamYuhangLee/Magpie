@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                         public void onResponse(Call<Response<Void>> call, retrofit2.Response<Response<Void>> response) {
                             String status = response.body().getStatus();
                             if (status.equals("NO_CONTENT")) {
-                                sendToMain();
+                                sendToHome();
                             } else {
                                 if (response.body().getError() != null) {
                                     Toast.makeText(LoginActivity.this, response.body().getError().getMessage(), Toast.LENGTH_SHORT).show();
@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void sendToMain() {
+    private void sendToHome() {
 
         Intent mainIntent = new Intent(LoginActivity.this, HomeActivity.class);
         startActivity(mainIntent);

@@ -8,16 +8,18 @@
     tools:context=".HomeActivity">
 
     <FrameLayout
-        android:id="@+id/main_container"
+        android:id="@+id/home_container"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/homeBottomNav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></FrameLayout>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"></FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/mainBottomNav"
+        android:id="@+id/homeBottomNav"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:foregroundGravity="center"
@@ -36,7 +38,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:clickable="true"
-        app:layout_constraintBottom_toTopOf="@+id/mainBottomNav"
+        app:layout_constraintBottom_toTopOf="@+id/homeBottomNav"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_add_post" />
 
