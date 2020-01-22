@@ -14,6 +14,7 @@
         <activity android:name="com.example.Magpie.SignupAcitivity"></activity>
         <activity android:name="com.example.Magpie.LoginActivity" />
         <activity android:name="com.example.Magpie.HomeActivity" />
+        <activity android:name="com.example.Magpie.NewPostActivity" />
         <activity android:name="com.example.Magpie.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

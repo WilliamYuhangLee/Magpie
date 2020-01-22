@@ -1,10 +1,13 @@
 package com.example.Magpie;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class HomeActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
+    FloatingActionButton addPost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +25,7 @@ public class HomeActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Home");
 
         bottomNavigationView = findViewById(R.id.homeBottomNav);
+        addPost = findViewById(R.id.add_post_btn);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.home_container, HomeFragment.getInstance(),
                 HomeFragment.TAG).commit();
@@ -41,6 +46,17 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        addPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, NewPostActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
     }
 
     @Override
